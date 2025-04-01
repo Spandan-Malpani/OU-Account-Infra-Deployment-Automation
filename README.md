@@ -88,9 +88,9 @@ Before you begin, ensure the following prerequisites are met:
 1. Follow the AWS official Documentation - [AWS CLI INSTALLER GUIDE](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
 2. Once installed, verify the installation by running:
 
-   ```bash
-   aws --version
-   ```
+ ```bash
+ aws --version
+ ```
 This should output the version of AWS CLI, confirming it’s successfully installed.
 
 ## Step 2: Set Up IAM User and Access Keys
@@ -113,7 +113,8 @@ To interact with AWS services through the CLI, you need AWS credentials (access 
 12. Click the Create access key button. This will generate a new Access Key ID and Secret Access Key.
 13. After the keys are generated, make sure to download the .csv file or copy the keys and store them securely.
     
-The file will contain:
+Example:   
+The file will contain :
 - Access Key ID: `AKIAEXAMPLEKEY123`
 - Secret Access Key: `wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY` 
 
@@ -145,193 +146,81 @@ This will prompt you to enter the following:
 Example:
 
 ```bash
-Copy
 AWS Access Key ID [None]: <your-access-key-id>
 AWS Secret Access Key [None]: <your-secret-access-key>
 Default region name [None]: us-west-2
 Default output format [None]:
 ```
 
-- Terraform setup
-  
-Step 1: Install Terraform
-1.1. Install Terraform on Windows
+## Step 4: Install & Setup Terraform 
+
+### 4.1. Install Terraform on Windows/Linux/MacOS
+
 Download Terraform:
+Go to the [Terraform Downloads](https://developer.hashicorp.com/terraform/install) page and download the appropriate version for your OS.
 
-Go to the Terraform Downloads page and download the appropriate version for Windows (usually a .zip file).
+**For Windows**
+1. After downloading, extract the ZIP file to a directory of your choice. For example, you can extract it to C:\Terraform.
+2. Right-click on 'This PC' (or 'Computer') and select Properties.
+3. Click on Advanced system settings on the left.
+4. In the System Properties window, click the Environment Variables button.
+5. Under System variables, scroll down to select the Path variable and click Edit.
+6. In the Edit Environment Variable dialog, click New and then add the path to the directory where you extracted Terraform (e.g., 
+   C:\Terraform). For example, if you extracted Terraform to C:\Terraform, add C:\Terraform to your PATH.
+7. Click OK to save and close all the dialogs.
+8. Verify Installation: Open Command Prompt and run the following command:
 
-Extract the ZIP File:
-
-After downloading, extract the ZIP file to a directory of your choice. For example, you can extract it to C:\Terraform.
-
-Add Terraform to System's PATH:
-
-Right-click on 'This PC' (or 'Computer') and select Properties.
-
-Click on Advanced system settings on the left.
-
-In the System Properties window, click the Environment Variables button.
-
-Under System variables, scroll down to select the Path variable and click Edit.
-
-In the Edit Environment Variable dialog, click New and then add the path to the directory where you extracted Terraform (e.g., C:\Terraform).
-
-For example, if you extracted Terraform to C:\Terraform, add C:\Terraform to your PATH.
-
-Click OK to save and close all the dialogs.
-
-Verify Installation:
-
-Open Command Prompt and run the following command:
-
-bash
-Copy
-terraform -v
+```bash
+terraform --version
+```
 If installed correctly, you should see the version of Terraform installed.
 
-1.2. Install Terraform on macOS
-Install via Homebrew:
+## Step 5: Configuring Backend
 
-If you don’t have Homebrew, install it using:
+### 5.1. Creating Backend S3 Bucket to store Terraform state file
+ 
+ 1. Navigate to S3 Console
+ 2. Click on the "Create bucket" Button
+ 3. Enter Bucket Name, choose a globally unique name for your S3 bucket. Example: my-terraform-bucket-123
+ 4. Select a Region, choose an AWS region where your bucket will reside.
+ 5. Set Bucket Configuration Options (Optional)
+      - Versioning: You can enable versioning if you want to keep multiple versions of the same object in your bucket.
+      - Tags: You can add metadata to the bucket by adding tags (key-value pairs).
+      - Object Lock: If you need to enforce write once, read many (WORM) protection for the objects in the bucket, enable Object Lock.
+      - Encryption: Enable encryption to automatically encrypt objects when they are uploaded to the bucket.
+      - Advanced settings: Additional settings such as logging, website hosting, and replication.
+ 6. Review and Create.
 
-bash
-Copy
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-Install Terraform using Homebrew:
+## Provisioning
 
-bash
-Copy
-brew install terraform
-Verify Installation:
+### 1. Clone the repository on your local machine
 
-In the terminal, check the version of Terraform:
+```bash
+git clone <repository-url>
+cd OU-Account-Infra-Deployment-Automation/
+```
+### 2. Adding backend configuration
 
-bash
-Copy
-terraform -v
-1.3. Install Terraform on Linux
-Download the Terraform ZIP File:
+ - In command prompt open the file `backend.tf` inside the project directory OR Open the project in VS Code (Or any other code editor) 
+   and open the file `backend.tf` .
+ - In the `backend.tf` whick looks like this:
 
-bash
-Copy
-wget https://releases.hashicorp.com/terraform/<version>/terraform_<version>_linux_amd64.zip
-Replace <version> with the desired version (e.g., 1.4.0).
-
-Extract the ZIP File:
-
-bash
-Copy
-unzip terraform_<version>_linux_amd64.zip
-Move Terraform to a Directory in Your PATH:
-
-bash
-Copy
-sudo mv terraform /usr/local/bin/
-Verify Installation:
-
-Run the following command to check if Terraform was installed successfully:
-
-bash
-Copy
-terraform -v
-Step 2: Set Up Terraform in Environment Variables
-2.1. Setting Environment Variables on Windows
-To ensure that you can run Terraform from any Command Prompt, you need to configure its path in the system’s environment variables.
-
-Open Environment Variables:
-
-Right-click on This PC or Computer, then select Properties.
-
-Click Advanced system settings on the left, then Environment Variables at the bottom.
-
-Add Terraform Path to System PATH:
-
-Under System variables, find and select Path, then click Edit.
-
-In the Edit Environment Variable dialog, click New.
-
-Add the full path to the directory where terraform.exe was extracted. For example:
-
-If you extracted Terraform to C:\Terraform, add C:\Terraform to your Path variable.
-
-Click OK to save and close all the windows.
-
-Verify Configuration:
-
-Open a Command Prompt window and run:
-
-bash
-Copy
-terraform -v
-If correctly configured, this will display the version of Terraform installed.
-
-2.2. Setting Environment Variables on macOS/Linux
-To ensure Terraform is accessible globally, you need to configure the path in your shell profile.
-
-Open your shell profile file in a text editor:
-
-bash
-Copy
-nano ~/.bash_profile     # For bash on macOS
-nano ~/.bashrc           # For bash on Linux
-nano ~/.zshrc            # For Zsh on macOS
-Add the Terraform directory to the PATH:
-
-For example, if you installed Terraform in /usr/local/bin/ (common for macOS/Linux), add the following line to the file:
-
-bash
-Copy
-export PATH=$PATH:/usr/local/bin
-If you manually extracted Terraform to a specific directory (e.g., /home/username/terraform), add that path:
-
-bash
-Copy
-export PATH=$PATH:/home/username/terraform
-Apply the changes:
-
-For bash on macOS/Linux:
-
-bash
-Copy
-source ~/.bash_profile  # For macOS or bash users
-source ~/.bashrc        # For Linux bash users
-For zsh:
-
-bash
-Copy
-source ~/.zshrc
-Verify Installation:
-
-Open a new terminal and run:
-
-bash
-Copy
-terraform -v
-You should see the version of Terraform installed, indicating the system is properly configured.
-
-### Provisioning
-
-Clone the repository
-'add steps to clone a repository over here -chatgpt'
-
-- Creating Backend S3 Bucket to store Terraform state file
-- 
-  Create an S3 bucket
-   
-  in the backend.tf file
-
-  terraform {
+```hcl
+terraform {
   backend "s3" {
-    bucket         = "<your-backend-s3-bucket-name>" 
+    bucket         = "<your-backend-s3-bucket-name>" # Enter the name of the S3 bucket you created
     key            = "terraform.tfstate"
-    region         = "<aws-region>" # Region of Backend S3 Bucket
+    region         = "<aws-region>" # Region of Backend S3 Bucket you created
     encrypt        = true
   }
 }
-make changes to the name and region
+```- After making the necessary changes make sure to save the file.
+> [!NOTE] 
+> Before moving to the next steps make sure that terraform version and aws credentials are configured for created user in the present 
+> working directory by running the commands mentioned above for the same once again.
 
-make sure terraform version is visible in pwd, aws credentials are configured for created user
-now add steps and also xplain what each command does
+### 3. Deploying the Infrastructure
+
 terraform init
 terraform validate
 terraform plan
