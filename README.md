@@ -214,7 +214,9 @@ terraform {
     encrypt        = true
   }
 }
-```- After making the necessary changes make sure to save the file.
+```
+- After making the necessary changes make sure to save the file.
+
 > [!NOTE] 
 > Before moving to the next steps make sure that terraform version and aws credentials are configured for created user in the present 
 > working directory by running the commands mentioned above for the same once again.
