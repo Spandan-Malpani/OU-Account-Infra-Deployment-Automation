@@ -76,71 +76,48 @@ This module creates necessary IAM roles and policies:
 Before you begin, ensure the following prerequisites are met:
 
 - **AWS Account**: You must have an active AWS account. If you don’t have one, you can sign up at [AWS Sign-Up](https://aws.amazon.com/).
-- **AWS CLI**: AWS Command Line Interface (CLI) should be installed and configured.
-- **Terraform**: Terraform should be installed on your system.
+- **AWS CLI**: AWS Command Line Interface (CLI) should be installed and configured. (Steps given below)
+- **Terraform**: Terraform should be installed on your system. (Steps given below)
 
 ---
 
 ## Step 1: Install AWS CLI
 
-### 1.1. Install AWS CLI on Windows
+### 1.1. Install AWS CLI on Windows/Linux/MacOs
 
-1. Download the AWS CLI MSI installer from the official [AWS CLI MSI Installer](https://aws.amazon.com/cli/).
-2. Run the installer and follow the on-screen instructions.
-3. Once installed, verify the installation by running:
+1. Follow the AWS official Documentation - [AWS CLI INSTALLER GUIDE](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
+2. Once installed, verify the installation by running:
 
    ```bash
    aws --version
    ```
 This should output the version of AWS CLI, confirming it’s successfully installed.
 
-1.2. Install AWS CLI on macOS
-If you're using macOS, use the following command to install AWS CLI via Homebrew:
+## Step 2: Set Up IAM User and Access Keys
 
-bash
-Copy
-brew install awscli
-Verify the installation:
-
-bash
-Copy
-aws --version
-1.3. Install AWS CLI on Linux
-For most Linux distributions, use the following commands:
-
-bash
-Copy
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-unzip awscliv2.zip
-sudo ./aws/install
-Verify the installation:
-
-bash
-Copy
-aws --version
-Step 2: Set Up IAM User and Access Keys
 To interact with AWS services through the CLI, you need AWS credentials (access key ID and secret access key). These credentials should be associated with an IAM user.
 
-2.1. Create an IAM User
-Sign in to the AWS Management Console.
+### 2.1. Create an IAM User
 
-Navigate to IAM (Identity and Access Management) from the AWS console.
+1. Sign in to the AWS Management Console.
+2. Navigate to IAM (Identity and Access Management) from the AWS console.
+3. In the left-hand sidebar, click Users and then click the Add user button.
+4. Provide a User name (e.g., Terraform-user).
+5. On the Set permissions page, choose Attach policies directly.
+6. Choose a policy, such as AdministratorAccess (or a more restrictive policy based on your use case).
+7. Click Next: Tags (you can skip tagging, but it’s good practice for organizational purposes).
+8. Review the configuration and click Create user.
+9. Now, In the IAM dashboard, on the left-hand side, click on Users under the Access management section.
+10. Click on the User you just created to generate the access keys.
+11. In the user details page, click on the Security credentials tab.
+12. Click the Create access key button. This will generate a new Access Key ID and Secret Access Key.
+13. After the keys are generated, make sure to download the .csv file or copy the keys and store them securely.
+    
+The file will contain:
+Access Key ID: `AKIAEXAMPLEKEY123`
+Secret Access Key: `wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY` 
 
-In the left-hand sidebar, click Users and then click the Add user button.
-
-Provide a User name (e.g., Terraform-user).
-
-Under Access type, select Programmatic access. This will generate an access key and secret key.
-
-On the Set permissions page, choose Attach policies directly.
-
-Choose a policy, such as AdministratorAccess (or a more restrictive policy based on your use case).
-
-Click Next: Tags (you can skip tagging, but it’s good practice for organizational purposes).
-
-Review the configuration and click Create user.
-
-Note: Ensure to save the Access key ID and Secret access key that are generated. You won’t be able to retrieve them again.
+> [!NOTE]: Ensure to save the Access key ID and Secret access key that are generated. You won’t be able to retrieve them again.
 
 Step 3: Configure AWS CLI
 Once you have your IAM user’s credentials, you can configure the AWS CLI.
