@@ -114,44 +114,43 @@ To interact with AWS services through the CLI, you need AWS credentials (access 
 13. After the keys are generated, make sure to download the .csv file or copy the keys and store them securely.
     
 The file will contain:
-Access Key ID: `AKIAEXAMPLEKEY123`
-Secret Access Key: `wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY` 
+- Access Key ID: `AKIAEXAMPLEKEY123`
+- Secret Access Key: `wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY` 
 
-> [!NOTE]: Ensure to save the Access key ID and Secret access key that are generated. You won’t be able to retrieve them again.
+> [!NOTE]
+> Ensure to save the Access key ID and Secret access key that are generated. You won’t be able to retrieve them again.
 
-Step 3: Configure AWS CLI
+## Step 3: Configure AWS CLI
+
 Once you have your IAM user’s credentials, you can configure the AWS CLI.
 
-3.1. Run AWS CLI Configuration Command
+### 3.1. Run AWS CLI Configuration Command
+
 Open a terminal in VS Code or Command Prompt on Windows and run the following command:
 
-bash
+```bash
 aws configure
+```
 This will prompt you to enter the following:
 
-AWS Access Key ID: Enter the access key ID obtained in Step 2.
-
-AWS Secret Access Key: Enter the secret access key obtained in Step 2.
-
-Default region name: Enter the AWS region you want to interact with (e.g., us-west-2, us-east-1). You can always change it later.
-
-Default output format: Choose your preferred output format. You can choose from:
-
-json (default)
-
-text
-
-table
-(Keep it Empty if not required)
+- AWS Access Key ID: Enter the access key ID obtained in Step 2.
+- AWS Secret Access Key: Enter the secret access key obtained in Step 2.
+- Default region name: Enter the AWS region you want to interact with (e.g., us-west-2, us-east-1). You can always change it later.
+- Default output format: Choose your preferred output format. You can choose from:
+  - json (default)
+  - text
+  - table
+  - (Keep it Empty if not required)
 
 Example:
 
-bash
+```bash
 Copy
 AWS Access Key ID [None]: <your-access-key-id>
 AWS Secret Access Key [None]: <your-secret-access-key>
 Default region name [None]: us-west-2
 Default output format [None]:
+```
 
 - Terraform setup
   
