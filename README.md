@@ -322,9 +322,6 @@ tags = {
 flow_log_role_name               = "vpc_flowlog_role" # VPC Flowlog Role Name
 aws_support_role_name            = "aws_support_role" # AWS Support role name
 account_id                       = "XXXXXXXXXX" # ID of the Account in which the resources are being deployed
-get_credentials_report_role_name = "Get-Credentials-ReportRole" /* GetCredentialsReport Role Specifically for TITAN */
-audit_account_id                 = "XXXXXXXXXXX" # ID of audit Account
-
 ```
  - Everything is detailed out with the help of comments. 
 
