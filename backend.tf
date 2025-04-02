@@ -1,8 +1,8 @@
 terraform {
   backend "s3" {
-    bucket         = "myawsbucket-forterraform"
+    bucket         = "<your-aws-bucket-name>" # Backend S3 Bucket name
     key            = "terraform.tfstate"
-    region         = "us-east-1"
+    region         = "<your-bucket-region-name>" # Region of Backend S3 Bucket
     encrypt        = true
   }
 }

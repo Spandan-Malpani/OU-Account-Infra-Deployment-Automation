@@ -9,9 +9,13 @@ output "securityhub_account_id" {
 output "enabled_security_standards" {
   description = "List of enabled security standards ARNs"
   value = [
-    aws_securityhub_standards_subscription.cis.standards_arn,
-    aws_securityhub_standards_subscription.pci_dss.standards_arn,
-    aws_securityhub_standards_subscription.nist.standards_arn
+    aws_securityhub_standards_subscription.cis_3_0_0.standards_arn,
+    aws_securityhub_standards_subscription.nist.standards_arn,
+    aws_securityhub_standards_subscription.foundational_best_practices.standards_arn,
+    # aws_securityhub_standards_subscription.resource_tagging.standards_arn,
+    # aws_securityhub_standards_subscription.cis_1_4_0.standards_arn,
+    # aws_securityhub_standards_subscription.pci_dss_4_0_1.standards_arn,
+    # aws_securityhub_standards_subscription.pci_dss_3_2_1.standards_arn,
   ]
 }
 

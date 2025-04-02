@@ -9,38 +9,51 @@ output "vpc_cidr" {
 }
 
 output "public_subnet_ids" {
-  description = "List of IDs of public subnets"
-  value       = [aws_subnet.public_subnet_1.id, aws_subnet.public_subnet_2.id]
+  value       = [aws_subnet.public_subnet[*].id]
+  description = "The IDs of the public subnets."
 }
 
+# Output the CIDR blocks of the public subnets
+output "public_subnet_cidr_blocks" {
+  value       = [aws_subnet.public_subnet[*].cidr_block]
+  description = "The CIDR blocks of the public subnets."
+}
+
+# Output the IDs of the private subnets
 output "private_subnet_ids" {
-  description = "List of IDs of private subnets"
-  value       = [aws_subnet.private_subnet_1.id, aws_subnet.private_subnet_2.id]
+  value       = [aws_subnet.private_subnet[*].id]
+  description = "The IDs of the private subnets."
+}
+
+# Output the CIDR blocks of the private subnets
+output "private_subnet_cidr_blocks" {
+  value       = [aws_subnet.private_subnet[*].cidr_block]
+  description = "The CIDR blocks of the private subnets."
 }
 
 output "gwlbe_subnet_ids" {
   description = "List of IDs of GWLBE subnets"
-  value       = [aws_subnet.gwlbe_subnet_1.id, aws_subnet.gwlbe_subnet_2.id]
+  value       = [aws_subnet.gwlbe_subnet[*].id]
 }
 
 output "vpc_endpoint_ids" {
   description = "List of VPC Endpoint IDs"
-  value       = [aws_vpc_endpoint.gwlbe_1.id, aws_vpc_endpoint.gwlbe_2.id]
+  value       = [aws_vpc_endpoint.gwlbe[*].id]
 }
 
 output "public_route_table_ids" {
   description = "List of IDs of public route tables"
-  value       = [aws_route_table.public_rt_1.id, aws_route_table.public_rt_2.id]
+  value       = [aws_route_table.public_rt[*].id]
 }
 
 output "private_route_table_ids" {
   description = "List of IDs of private route tables"
-  value       = [aws_route_table.private_rt_1.id, aws_route_table.private_rt_2.id]
+  value       = [aws_route_table.private_rt[*].id]
 }
 
 output "gwlbe_route_table_id" {
   description = "ID of the GWLBE route table"
-  value       = aws_route_table.gwlbe.id
+  value       = [aws_route_table.gwlbe_rt[*].id]
 }
 
 output "gwlb_ingress_route_table_id" {
@@ -63,7 +76,3 @@ output "vpc_flow_log_id" {
   value       = aws_flow_log.vpc_flow_log.id
 }
 
-output "availability_zones" {
-  description = "List of availability zones used in the VPC"
-  value       = var.availability_zones
-}

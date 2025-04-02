@@ -25,19 +25,18 @@ variable "igw_name" {
   type        = string
 }
 
-variable "availability_zones" {
-  description = "List of availability zones"
-  type        = list(string)
-}
-
-variable "public_subnet_cidrs" {
-  description = "CIDR blocks for public subnets"
-  type        = list(string)
-}
-
-variable "private_subnet_cidrs" {
-  description = "CIDR blocks for private subnets"
-  type        = list(string)
+variable "subnet_configurations" {
+  type = object({
+    public = list(object({
+      cidr_block        = string
+      availability_zone = string
+    }))
+    private = list(object({
+      cidr_block        = string
+      availability_zone = string
+    }))
+  })
+  description = "Configuration for public and private subnets including CIDR blocks and AZ placement"
 }
 
 variable "gwlbe_subnet_cidrs" {
@@ -45,20 +44,21 @@ variable "gwlbe_subnet_cidrs" {
   type        = list(string)
 }
 
+variable "gwlbe_subnet_azs" {
+  description = "List of Availability Zones for which to create GWLBE subnets"
+  type        = list(string)
+  default     = []  # If empty, GWLBE subnets will be created in all AZs
+}
+
+variable "gwlbe_service_name" {
+  description = "GWLB endpoint service name"
+  type        = string
+}
+
 variable "map_public_ip" {
   description = "Auto-assign public IP on launch for public subnets"
   type        = bool
   default     = true
-}
-
-variable "gwlbe_1_service_name" {
-  description = "GWLB endpoint service name"
-  type        = string
-}
-
-variable "gwlbe_2_service_name" {
-  description = "GWLB endpoint service name"
-  type        = string
 }
 
 variable "log_group_name" {
@@ -94,16 +94,12 @@ variable "account_id" {
   type        = string
 }
 
-# Get Credentials Report Role Variables
-variable "get_credentials_report_role_name" {
-  description = "Name of the role for getting credentials report"
+/*
+variable "role_name" {
+  description = "Name of the role"
   type        = string
 }
-
-variable "audit_account_id" {
-  description = "AWS Account ID of the audit account"
-  type        = string
-}
+*/
 
 
 variable "password_policy" {

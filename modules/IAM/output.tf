@@ -25,19 +25,6 @@ output "aws_support_role_name" {
 }
 
 ###############################
-# Credentials Report Role
-###############################
-output "get_credentials_report_role_arn" {
-  description = "ARN of the IAM credentials report access role"
-  value       = aws_iam_role.get_credentials_report_role.arn
-}
-
-output "get_credentials_report_role_name" {
-  description = "Name of the IAM credentials report access role"
-  value       = aws_iam_role.get_credentials_report_role.name
-}
-
-###############################
 # Policy Attachments
 ###############################
 output "support_policy_attachment_id" {
@@ -50,8 +37,5 @@ output "vpc_flow_log_policy_id" {
   value       = aws_iam_role_policy.vpc_flow_log_policy.id
 }
 
-output "credentials_report_policy_id" {
-  description = "ID of the credentials report policy"
-  value       = aws_iam_role_policy.get_credential_report_policy.id
-}
+
 

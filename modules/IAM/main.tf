@@ -39,7 +39,7 @@ resource "aws_iam_role_policy" "vpc_flow_log_policy" {
 EOF
 }
 
-# AWS Support Access Role 
+# AWS Support Access Role for Access to AWS Support
 resource "aws_iam_role" "aws_support_role" {
   name = var.aws_support_role_name
 
@@ -65,40 +65,19 @@ resource "aws_iam_role_policy_attachment" "aws_support_role_policy_attachment" {
   policy_arn = "arn:aws:iam::aws:policy/AWSSupportAccess"
 }
 
-resource "aws_iam_role" "get_credentials_report_role" {
-  name = var.get_credentials_report_role_name
+/* ADD Roles as per requirement
+resource "aws_iam_role" "role_name" {
+  name = var.role_name
 
   assume_role_policy = <<EOF
-  {
-  "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Principal": {
-                "AWS": "arn:aws:iam::${var.audit_account_id}:role/CentralAccountLambdaRole"
-            },
-            "Action": "sts:AssumeRole"
-        }
-    ]
-  }
+ 
   EOF
 }
 
-resource "aws_iam_role_policy" "get_credential_report_policy" {
-  role   = aws_iam_role.get_credentials_report_role.name
+resource "aws_iam_role_policy" "policy" {
+  role   = aws_iam_role.role.name
   policy = <<EOF
-{
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": [
-				"iam:GenerateCredentialReport",
-				"iam:GetCredentialReport"
-			],
-			"Resource": "*"
-		}
-	]
-}
+
 EOF
 }
+*/

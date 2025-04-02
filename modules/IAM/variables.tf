@@ -15,13 +15,9 @@ variable "account_id" {
   type        = string
 }
 
-# Get Credentials Report Role Variables
-variable "get_credentials_report_role_name" {
-  description = "Name of the role for getting credentials report"
+/*
+variable "role_name" {
+  description = "Name of the role"
   type        = string
 }
-
-variable "audit_account_id" {
-  description = "AWS Account ID of the audit account"
-  type        = string
-}
+*/
