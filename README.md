@@ -16,7 +16,8 @@ This approach provides a standardized and generalized framework that can be used
 
 ## Deployed Network Resource Map 
 
-![Image](./VPC-RESOURCE-Architecture.jpg)
+![ResourceMap](https://github.com/user-attachments/assets/1a7f3244-1447-46b2-b63c-b0ab4a4e245e)
+
 
 ## Project Structure
 
