@@ -309,7 +309,7 @@ log_group_class                      = "STANDARD" # Make Sure it's in upper case
 log_retention_days                   = 0          # 0 means never expire
 
 # Provide format for VPC flowlog
-flowlog_format                       = "$${version} $${account-id} $${interface-id} $${pkt-srcaddr} $${srcaddr} $${dstaddr} $${pkt-dstaddr} $${srcport} $${dstport} $${protocol} $${packets} $${bytes} $${start} $${end} $${log-status} $${flow-direction} $${tcp-flags} $${action}"
+flowlog_format                       = "$${version} $${account-id} $${interface-id} $${pkt-srcaddr}"
 flowlog_maximum_aggregation_interval = 60 # Flowlog maximum aggregation Interval - 60 OR 600 only
 
 # Custom tags to be applied to all resources
