@@ -325,7 +325,7 @@ account_id                       = "XXXXXXXXXX" # ID of the Account in which the
 ```
  - Everything is detailed out with the help of comments. 
 
-**This flexible solution to choose number of AZ's and number of Subnets with there provisioning was one of the main goals of this project.**
+**This flexible solution to choose number of AZ's and number of Subnets was one of the main goals of this project.**
 
 ### 4. Choosing Security Standards
  
